@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title><%= user.name %> - TSF Bank</title>
+		<%- include("partials/bootstrap.ejs") -%>
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="/css/user.css">
+		<link rel="stylesheet" href="/css/navbar.css">
+		<script src="/js/navbar.js" defer></script>
+	</head>
+	<body>
+		<%- include("partials/navbar.ejs") -%>
+		<main>
+			<h1>Customer Details</h1>
+			<div class="card d-flex">
+				<div class="card-info d-flex">
+					<img src=<%=user.profile%> alt="user profile" />
+					<div class="details-container">
+						<p><b>Name:</b> <%= user.name %></p>
+						<p><b>Account:</b> <span id="userAccount"><%= user.account %></span></p>
+						<p><b>DOB:</b> <%= user.dob.getDate() %>/<%= user.dob.getMonth() %>/<%= user.dob.getFullYear() %></p>
+						<p><b>Address:</b> <%= user.address %></p>
+						<p><b>Email:</b> <%= user.email %></p>
+						<p><b>Gender:</b> <%= user.gender %></p>
+						<p><b>Contact:</b> <%= user.contactNumber %></p>
+						<p><b>Balance:</b> <span>$<%= user.balance %></span></p>
+					</div>
+				</div>
+				<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+					Transfer Money
+				</button>
+			</div>
+
+			<!-- Modal -->
+			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h1 class="modal-title fs-5" id="staticBackdropLabel">Transfer Money</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<select class="form-select" id="transferToAccount" aria-label="Default select example">
+							<option>Select Account To Transfer</option>
+							<% data.map((value, index)=>{ %>
+								<option data-account=<%= value.account %>><%= value.name %></option>
+							<% }) %>
+						  </select>
+						<input class="form-control mt-2" type="number" id="amount" placeholder="Enter Amount" />
+					</div>
+					<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-success" onclick="transferMoney()">Transfer</button>
+					</div>
+				</div>
+				</div>
+			</div>
+		</main>
+	</body>
+	<script>
+		function transferMoney() {
+			const userAccountNumber = document.getElementById("userAccount").textContent;
+			const transferToAccount = document.getElementById("transferToAccount").value;
+			const amount = document.getElementById("amount").value;
+
+			fetch("https://tsf-bank.onrender.com/transfer", {
+			method: "POST",
+				body: JSON.stringify({
+					sender: userAccountNumber, receiver: transferToAccount, amount:amount
+				}),
+				headers: {
+					"Content-type": "application/json; charset=UTF-8"
+				}
+			}).finally(()=>{
+				location.href = "https://tsf-bank.onrender.com/users"
+			})
+		}
+		
+	</script>
+</html>

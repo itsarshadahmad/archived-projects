@@ -1,0 +1,30 @@
+main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 2rem;
+}
+
+main div {
+	width: 50vw;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	padding: 7px;
+	width: 100vw;
+	text-align: center;
+}
+
+footer p {
+	margin: 0;
+	padding: 0;
+}
+
+@media (max-width: 1000px) {
+    main div {
+        width: 80vw;
+    }
+}
