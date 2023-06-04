@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Movies Catalogue</string>
+    <string name="movie_cover_poster">Movie Cover Poster</string>
+    <string name="movie_rating">Movie Rating</string>
+    <string name="poster">Poster</string>
+    <string name="directed_by">Directed By</string>
+    <string name="imdb">IMDB</string>
+    <string name="overview">Overview:</string>
+</resources>

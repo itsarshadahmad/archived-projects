@@ -1,0 +1,15 @@
+<%- include("partials/header") %>
+    <form class="login-form" method="post" action="/login">
+        <h1 class="title mb-4">Login</h1>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" name="password" id="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary login-btn">Login</button>
+    </form>
+
+<%- include("partials/footer") %>

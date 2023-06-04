@@ -1,0 +1,20 @@
+<%- include("partials/header.ejs") -%>
+
+<div class="text-center">
+    <a class="btn btn-primary add-btn m-4" href="/compose" role="button">Add Journals</a>
+</div>
+
+<div class="journals-container">
+<% journalData.forEach(element => { %>
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= element.title %></h5>
+      <p class="card-text"><%= element.body.substring(0,100)+" ... " %></p>
+      <a href="/post/<%=element._id%>" class="card-link">Read More</a>
+      <a href="/delete/<%=element._id%>" class="card-link">Delete Post</a>
+    </div>
+  </div>
+  <% }); %>
+</div>
+</div>
+<%- include("partials/footer.ejs") -%> 
